@@ -60,8 +60,8 @@ public class ClienteTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void testCognomeNull() {
 		this.cliente = creazioneCliente("", null, "", "", database);
-}
-
+	}
+	
 	private Cliente creazioneCliente(String nome, String cognome, String nickname, String password, Database database) {
 		return new Cliente(nome, cognome, nickname, password, database);
 	}
