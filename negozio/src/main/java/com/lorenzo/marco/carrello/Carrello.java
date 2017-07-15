@@ -34,4 +34,5 @@ public class Carrello {
 		}
 		return spesaTotale;
 	}
+
 }
