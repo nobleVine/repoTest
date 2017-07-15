@@ -45,23 +45,28 @@ public class Cliente {
 
 	private void controlloParametriDiInizializzazioneCliente(String nome, String cognome, String nickname,
 			String password) {
-		if (nome != "" && nome != null) {
-			this.nome = nome;
-		} else {
+		if (nome == "" || nome == null) {
 			throw new IllegalArgumentException("Il nome del cliente non può essere vuoto");
+		} else {
+			this.nome = nome;
 		}
 
-		if (cognome != "" && cognome != null) {
-			this.cognome = cognome;
-		} else {
+		if (cognome == "" || cognome == null) {
 			throw new IllegalArgumentException("Il cognome del cliente non può essere vuoto");
+		} else {
+			this.cognome = cognome;
 		}
 
-		if (nickname != null && password != null) {
-			this.nickname = nickname;
-			this.password = password;
+		if (nickname == null) {
+			throw new IllegalArgumentException("nickname non può essere vuoto");
 		} else {
-			throw new IllegalArgumentException("nickname e password non possono essere null");
+			this.nickname = nickname;
+		}
+		
+		if (password == null) {
+			throw new IllegalArgumentException("password non può essere vuoto");
+		} else {
+			this.password = password;
 		}
 
 	}

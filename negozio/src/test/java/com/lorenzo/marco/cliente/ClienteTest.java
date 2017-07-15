@@ -28,21 +28,31 @@ public class ClienteTest {
 
 	@Test
 	public void testCognome() {
-		this.cliente = creazioneCliente("Marco", "Vignini", "", "", database);
+		this.cliente = creazioneCliente("Marco", "Vignini", "nick", "pass", database);
 		assertEquals("Vignini", this.cliente.getCognome());
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testNomeVuoto() {
-		this.cliente = creazioneCliente("", "Vignini", "", "", database);
+		this.cliente = creazioneCliente("", "Vignini", "nick", "pass", database);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testCognomeVuoto() {
-		this.cliente = creazioneCliente("Marco", "", "", "", database);
+		this.cliente = creazioneCliente("Marco", "", "nick", "pass", database);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testNicknameVuoto() {
+		this.cliente = creazioneCliente("Marco", "Vignini", null, "pass", database);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testPasswordVuoto() {
+		this.cliente = creazioneCliente("Marco", "Vignini", "nick", null, database);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	/*@Test(expected = IllegalArgumentException.class)
 	public void testTuttiCampiVuoti() {
 		this.cliente = creazioneCliente("", "", "", "", database);
 	}
@@ -60,7 +70,7 @@ public class ClienteTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void testCognomeNull() {
 		this.cliente = creazioneCliente("", null, "", "", database);
-	}
+	}*/
 	
 	/* Metodi che usano il mock */
 
