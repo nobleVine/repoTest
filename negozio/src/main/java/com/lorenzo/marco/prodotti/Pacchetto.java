@@ -13,7 +13,6 @@ public class Pacchetto extends ProdottoGenerico {
 
 	public double getPrezzo() {
 		for (int i = 0; i < listaProdotti.size(); i++) {
-			System.out.println("Get prezzo");
 			prezzo = prezzo + listaProdotti.get(i).getPrezzo();
 		}
 		return prezzo;

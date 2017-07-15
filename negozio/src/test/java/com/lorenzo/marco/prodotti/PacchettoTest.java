@@ -12,7 +12,6 @@ public class PacchettoTest extends ProdottoGenericoTest {
 	public void setUp() {
 		pacchetto = this.creazionePacchetto("Pacchetto", "Pacchetto basket");
 		prodotto = creazioneProdottoSingolo("Maglietta", 50, "Maglietta basket");
-		System.out.println("Creazione pacchetto");
 	}
 	
 	@Test
@@ -55,11 +54,8 @@ public class PacchettoTest extends ProdottoGenericoTest {
 	public void testGetPrezzoPacchettoConPiuDiUnProdotto() {
 		ProdottoSingolo prodotto2 = creazioneProdottoSingolo("Pantaloncini", 50, "Pantaloncini basket");
 		pacchetto.aggiungiProdotto(prodotto);
-		System.out.println("Aggiunto prodotto");
 		pacchetto.aggiungiProdotto(prodotto2);
-		System.out.println("Aggiunto prodotto2");
 		assertEquals(100, pacchetto.getPrezzo(), 0);
-		System.out.println("Assert");
 	}
 
 	@Test(expected = IllegalArgumentException.class)

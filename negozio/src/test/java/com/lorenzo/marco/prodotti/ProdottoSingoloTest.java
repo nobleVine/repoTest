@@ -5,6 +5,11 @@ import static org.junit.Assert.*;
 import org.junit.*;
 
 public class ProdottoSingoloTest extends ProdottoGenericoTest {
+	
+	@Before
+	public void setUp() {
+		prodotto = creazioneProdottoSingolo("Maglietta", 50, "Maglietta basket");
+	}
 
 	@Test
 	public void testNome() {
