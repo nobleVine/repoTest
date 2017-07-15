@@ -31,37 +31,73 @@ public class ClienteTest {
 		this.cliente = creazioneCliente("Marco", "Vignini", "", "", database);
 		assertEquals("Vignini", this.cliente.getCognome());
 	}
-	
+
 	@Test(expected = IllegalArgumentException.class)
 	public void testNomeVuoto() {
 		this.cliente = creazioneCliente("", "Vignini", "", "", database);
 	}
-	
+
 	@Test(expected = IllegalArgumentException.class)
 	public void testCognomeVuoto() {
 		this.cliente = creazioneCliente("Marco", "", "", "", database);
 	}
-	
+
 	@Test(expected = IllegalArgumentException.class)
 	public void testTuttiCampiVuoti() {
 		this.cliente = creazioneCliente("", "", "", "", database);
 	}
-	
+
 	@Test(expected = IllegalArgumentException.class)
 	public void testTuttiCampiNull() {
 		this.cliente = creazioneCliente(null, null, "", "", database);
 	}
-	
+
 	@Test(expected = IllegalArgumentException.class)
 	public void testNomeNull() {
 		this.cliente = creazioneCliente(null, "", "", "", database);
 	}
-	
+
 	@Test(expected = IllegalArgumentException.class)
 	public void testCognomeNull() {
 		this.cliente = creazioneCliente("", null, "", "", database);
 	}
 	
+	/* Metodi che usano il mock */
+
+	@Test
+	public void testRichiestaAutenticazioneRiuscita() throws UnknownHostException {
+		this.cliente = creazioneCliente("Marco", "Vignini", "nick", "", database);
+		when(database.login("nick", "")).thenReturn("Richiesta di autenticatione riuscita");
+		assertEquals("Richiesta di autenticatione riuscita", this.cliente.richiestaAutenticazione());
+		verify(database, times(1)).login("nick", "");
+	}
+
+	@Test
+	public void testRichiestaAutenticazioneNonRiuscita() throws UnknownHostException {
+		this.cliente = creazioneCliente("Marco", "Vignini", "nick", "", database);
+		when(database.login("", "")).thenReturn("Richiesta di autenticatione riuscita");
+		assertNotEquals("Richiesta di autenticatione riuscita", this.cliente.richiestaAutenticazione());
+		verify(database, times(1)).login("nick", "");
+	}
+
+	@Test
+	public void testRichiestaRegistrazioneRiuscita() throws UnknownHostException {
+		this.cliente = creazioneCliente("Marco", "Vignini", "", "", database);
+		when(database.registrazioneCliente(cliente.getNome(), cliente.getCognome()))
+				.thenReturn("Registrazione riuscita");
+		assertEquals("Registrazione riuscita", this.cliente.richiestaRegistrazione());
+		verify(database, times(1)).registrazioneCliente(cliente.getNome(), cliente.getCognome());
+	}
+
+	@Test
+	public void testRichiestaRegistrazioneNonRiuscita() throws UnknownHostException {
+		this.cliente = creazioneCliente("Marco", "Vignini", "", "", database);
+		when(database.registrazioneCliente(cliente.getNome(), cliente.getCognome()))
+				.thenReturn("Registrazione non riuscita");
+		assertNotEquals("Registrazione riuscita", this.cliente.richiestaRegistrazione());
+		verify(database, times(1)).registrazioneCliente(cliente.getNome(), cliente.getCognome());
+	}
+
 	private Cliente creazioneCliente(String nome, String cognome, String nickname, String password, Database database) {
 		return new Cliente(nome, cognome, nickname, password, database);
 	}
