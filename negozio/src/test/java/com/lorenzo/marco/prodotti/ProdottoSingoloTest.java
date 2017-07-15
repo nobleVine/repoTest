@@ -7,22 +7,24 @@ import org.junit.*;
 public class ProdottoSingoloTest {
 
 	private ProdottoSingolo prodotto;
+	
+	@Before
+	public void setUp() {
+		prodotto = creazioneProdottoSingolo("Maglietta", 50, "Maglietta basket");
+	}
 
 	@Test
 	public void testNome() {
-		prodotto = creazioneProdottoSingolo("Maglietta", 50, "Maglietta basket");
 		assertEquals("Maglietta", prodotto.getNome());
 	}
 
 	@Test
 	public void testPrezzo() {
-		prodotto = creazioneProdottoSingolo("Maglietta", 50, "Maglietta basket");
 		assertEquals(50, prodotto.getPrezzo(), 0);
 	}
 
 	@Test
 	public void testDescrizione() {
-		prodotto = creazioneProdottoSingolo("Maglietta", 1, "Maglietta basket");
 		assertEquals("Maglietta basket", prodotto.getDescrizione());
 	}
 
@@ -43,19 +45,11 @@ public class ProdottoSingoloTest {
 
 	@Test
 	public void testTipoNome() {
-		prodotto = creazioneProdottoSingolo("Maglietta", 1, "Maglietta basket");
 		assertTrue(prodotto.getNome() instanceof String);
 	}
 
-	/*
-	 * @Test public void testTipoPrezzo() { prodotto =
-	 * creazioneProdotto("Maglietta", 1, "Maglietta basket");
-	 * assertTrue(prodotto.getPrezzo() ); }
-	 */
-
 	@Test
 	public void testTipoDescrizione() {
-		prodotto = creazioneProdottoSingolo("Maglietta", 1, "Maglietta basket");
 		assertTrue(prodotto.getDescrizione() instanceof String);
 	}
 
