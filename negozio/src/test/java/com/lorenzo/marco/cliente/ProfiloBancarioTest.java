@@ -2,8 +2,10 @@ package com.lorenzo.marco.cliente;
 
 import static org.junit.Assert.*;
 
-import org.junit.Test;
+import org.junit.*;
+import static org.mockito.Mockito.*;
 
+import com.lorenzo.marco.banca.Banca;
 import com.lorenzo.marco.database.Database;
 
 public class ProfiloBancarioTest {
@@ -11,25 +13,27 @@ public class ProfiloBancarioTest {
 	private ProfiloBancarioCliente profiloBancarioCliente;
 	private Cliente cliente;
 	private Database database;
+	private Banca banca;
+
+	@Before
+	public void setUp() {
+		banca = mock(Banca.class);
+		this.cliente = new Cliente("Marco", "Vignini", "nick", "pass", database);
+		this.profiloBancarioCliente = new ProfiloBancarioCliente(cliente, 123456789, 3000, banca);
+	}
 
 	@Test
 	public void testGetIdConto() {
-		this.cliente = new Cliente("Marco", "Vignini", "nick", "pass", database);
-		this.profiloBancarioCliente = new ProfiloBancarioCliente(cliente, 123456789, 3000);
 		assertEquals(123456789, this.profiloBancarioCliente.getIdConto());
 	}
 
 	@Test
 	public void testGetSaldo() {
-		this.cliente = new Cliente("Marco", "Vignini", "nick", "pass", database);
-		this.profiloBancarioCliente = new ProfiloBancarioCliente(cliente, 123456789, 3000);
 		assertEquals(3000, this.profiloBancarioCliente.getSaldo(), 0);
 	}
 
 	@Test
 	public void testGetClient() {
-		this.cliente = new Cliente("Marco", "Vignini", "nick", "pass", database);
-		this.profiloBancarioCliente = new ProfiloBancarioCliente(cliente, 123456789, 400);
 		assertEquals(this.profiloBancarioCliente.getCliente().getNome(), this.cliente.getNome());
 		assertEquals(this.profiloBancarioCliente.getCliente().getCognome(), this.cliente.getCognome());
 		assertTrue(this.cliente.equals(this.profiloBancarioCliente.getCliente()));
@@ -37,20 +41,36 @@ public class ProfiloBancarioTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testClienteNull() {
-		this.cliente = new Cliente("Marco", "Vignini", "nick", "pass", database);
-		this.profiloBancarioCliente = new ProfiloBancarioCliente(null, 12345, 345);
+		this.profiloBancarioCliente = new ProfiloBancarioCliente(null, 12345, 345, banca);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testIdContoNonAmmissibile() {
-		this.cliente = new Cliente("Marco", "Vignini", "nick", "pass", database);
-		this.profiloBancarioCliente = new ProfiloBancarioCliente(cliente, 0, 43432);
+		this.profiloBancarioCliente = new ProfiloBancarioCliente(cliente, 0, 43432, banca);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testSaldoNonAmmissibile() {
-		this.cliente = new Cliente("Marco", "Vignini", "nick", "pass", database);
-		this.profiloBancarioCliente = new ProfiloBancarioCliente(cliente, 1, 0);
+		this.profiloBancarioCliente = new ProfiloBancarioCliente(cliente, 1, 0, banca);
+	}
+
+	@Test
+	public void testAcquistoRiuscito() {
+		when(banca.pagamento(this.profiloBancarioCliente.getIdConto(),
+				this.profiloBancarioCliente.getCarrello().spesaTotale())).thenReturn("Acquisto riuscito");
+		String risultatoPagamento = this.profiloBancarioCliente.faiAcquisto();
+		assertEquals("Acquisto riuscito", risultatoPagamento);
+		verify(banca, times(1)).pagamento(this.profiloBancarioCliente.getIdConto(),
+				this.profiloBancarioCliente.getCarrello().spesaTotale());
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testAcquistoNonRiuscito() {
+		when(banca.pagamento(this.profiloBancarioCliente.getIdConto(),
+				this.profiloBancarioCliente.getCarrello().spesaTotale())).thenThrow(new IllegalArgumentException("Acquisto non riuscito: non hai abbastanza soldi!"));
+		assertEquals("Acquisto riuscito", this.profiloBancarioCliente.faiAcquisto());
+		verify(banca, times(1)).pagamento(this.profiloBancarioCliente.getIdConto(),
+				this.profiloBancarioCliente.getCarrello().spesaTotale());
 	}
 
 }

@@ -26,4 +26,13 @@ public class Carrello {
 	public int lunghezzaCarrello() {
 		return this.listaDellaSpesa.size();
 	}
+
+	public double spesaTotale() {
+		double spesaTotale = 0;
+		for ( ProdottoGenerico prodottoGenerico : this.listaDellaSpesa) {
+			spesaTotale = spesaTotale + prodottoGenerico.getPrezzo();
+		}
+		return spesaTotale;
+	}
+
 }

@@ -17,7 +17,6 @@ public class CarrelloTest {
 	public void setUp() {
 		this.carrello = new Carrello();
 		this.prodotto = new ProdottoSingolo("Pack King", 50, "il pacchetto di Lebron");
-
 	}
 	
 	@Test
@@ -55,4 +54,17 @@ public class CarrelloTest {
 		this.carrello.rimuoviDalCarrello(prodotto);
 	}
 	
+	@Test
+	public void testSpesaTotale() {
+		ProdottoSingolo prodottoSingolo1 = new ProdottoSingolo("maglia", 50, "lebron");
+		ProdottoSingolo prodottoSingolo2 = new ProdottoSingolo("maglietta", 60, "Steph");
+		ProdottoSingolo prodottoSingolo3 = new ProdottoSingolo("pantaloncini", 50, "Heat");
+		Pacchetto pacchetto = new Pacchetto("pack1", "descrizione");
+		pacchetto.aggiungiProdotto(prodottoSingolo2);
+		pacchetto.aggiungiProdotto(prodottoSingolo3);
+		this.carrello.aggiungiAlCarrello(prodottoSingolo1);
+		this.carrello.aggiungiAlCarrello(pacchetto);
+		assertEquals(160, this.carrello.spesaTotale(),0);
+	}
+
 }
