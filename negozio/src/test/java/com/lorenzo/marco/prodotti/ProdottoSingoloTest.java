@@ -4,46 +4,46 @@ import static org.junit.Assert.*;
 
 import org.junit.*;
 
-public class ProdottoTest {
+public class ProdottoSingoloTest {
 
-	private Prodotto prodotto;
+	private ProdottoSingolo prodotto;
 
 	@Test
 	public void testNome() {
-		prodotto = creazioneProdotto("Maglietta", 50, "Maglietta basket");
+		prodotto = creazioneProdottoSingolo("Maglietta", 50, "Maglietta basket");
 		assertEquals("Maglietta", prodotto.getNome());
 	}
 
 	@Test
 	public void testPrezzo() {
-		prodotto = creazioneProdotto("Maglietta", 50, "Maglietta basket");
+		prodotto = creazioneProdottoSingolo("Maglietta", 50, "Maglietta basket");
 		assertEquals(50, prodotto.getPrezzo(), 0);
 	}
 
 	@Test
 	public void testDescrizione() {
-		prodotto = creazioneProdotto("Maglietta", 1, "Maglietta basket");
+		prodotto = creazioneProdottoSingolo("Maglietta", 1, "Maglietta basket");
 		assertEquals("Maglietta basket", prodotto.getDescrizione());
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testInputNegativo() {
-		prodotto = creazioneProdotto("Maglietta", -9, "Maglietta basket");
+		prodotto = creazioneProdottoSingolo("Maglietta", -9, "Maglietta basket");
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testNomeNonVuoto() {
-		prodotto = creazioneProdotto(null, 5, "Maglietta basket");
+		prodotto = creazioneProdottoSingolo(null, 5, "Maglietta basket");
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testDescrizioneNonVuoto() {
-		prodotto = creazioneProdotto("Maglietta", 5, "");
+		prodotto = creazioneProdottoSingolo("Maglietta", 5, "");
 	}
 
 	@Test
 	public void testTipoNome() {
-		prodotto = creazioneProdotto("Maglietta", 1, "Maglietta basket");
+		prodotto = creazioneProdottoSingolo("Maglietta", 1, "Maglietta basket");
 		assertTrue(prodotto.getNome() instanceof String);
 	}
 
@@ -55,12 +55,12 @@ public class ProdottoTest {
 
 	@Test
 	public void testTipoDescrizione() {
-		prodotto = creazioneProdotto("Maglietta", 1, "Maglietta basket");
+		prodotto = creazioneProdottoSingolo("Maglietta", 1, "Maglietta basket");
 		assertTrue(prodotto.getDescrizione() instanceof String);
 	}
 
-	private Prodotto creazioneProdotto(String nome, double prezzo, String descrizione) {
-		return new Prodotto(nome, prezzo, descrizione);
+	private ProdottoSingolo creazioneProdottoSingolo(String nome, double prezzo, String descrizione) {
+		return new ProdottoSingolo(nome, prezzo, descrizione);
 	}
 
 }

@@ -1,8 +1,8 @@
 package com.lorenzo.marco.prodotti;
 
-public class Prodotto extends ProdottoGenerico {
+public class ProdottoSingolo extends ProdottoGenerico {
 
-	public Prodotto(String nome, double prezzo, String descrizione) {
+	public ProdottoSingolo(String nome, double prezzo, String descrizione) {
 		super(nome, descrizione);
 		super.controlloParametriProdotti(nome, descrizione);
 		controlloPrezzo(prezzo);
