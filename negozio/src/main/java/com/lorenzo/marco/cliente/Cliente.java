@@ -24,6 +24,14 @@ public class Cliente {
 	public String getCognome() {
 		return cognome;
 	}
+	
+	private String getPassword() {
+		return password;
+	}
+
+	private String getNickname() {
+		return nickname;
+	}
 
 	private void controlloParametriDiInizializzazioneCliente(String nome, String cognome, String nickname,
 			String password) {

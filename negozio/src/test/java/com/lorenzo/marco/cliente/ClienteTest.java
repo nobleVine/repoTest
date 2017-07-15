@@ -31,6 +31,36 @@ public class ClienteTest {
 		this.cliente = creazioneCliente("Marco", "Vignini", "", "", database);
 		assertEquals("Vignini", this.cliente.getCognome());
 	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testNomeVuoto() {
+		this.cliente = creazioneCliente("", "Vignini", "", "", database);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testCognomeVuoto() {
+		this.cliente = creazioneCliente("Marco", "", "", "", database);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testTuttiCampiVuoti() {
+		this.cliente = creazioneCliente("", "", "", "", database);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testTuttiCampiNull() {
+		this.cliente = creazioneCliente(null, null, "", "", database);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testNomeNull() {
+		this.cliente = creazioneCliente(null, "", "", "", database);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testCognomeNull() {
+		this.cliente = creazioneCliente("", null, "", "", database);
+}
 
 	private Cliente creazioneCliente(String nome, String cognome, String nickname, String password, Database database) {
 		return new Cliente(nome, cognome, nickname, password, database);
