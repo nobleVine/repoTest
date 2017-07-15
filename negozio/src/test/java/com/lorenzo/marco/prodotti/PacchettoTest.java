@@ -73,7 +73,13 @@ public class PacchettoTest {
 	public void testDescrizioneNonVuoto() {
 		pacchetto = creazionePacchetto("Pacchetto", "");
 	}
-
+	
+	@Test
+	public void testControlloPrezzo() {
+		pacchetto = creazionePacchetto("Pacchetto", "Pacchetto basket");
+		double prezzo = 0;
+		pacchetto.controlloPrezzo(prezzo);
+	}
 	private ProdottoSingolo creazioneProdotto(String nome, double prezzo, String descrizione) {
 		return new ProdottoSingolo(nome, prezzo, descrizione);
 	}
