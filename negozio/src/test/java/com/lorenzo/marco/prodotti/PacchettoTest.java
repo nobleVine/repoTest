@@ -4,17 +4,17 @@ import static org.junit.Assert.*;
 
 import org.junit.*;
 
-public class PacchettoTest {
+public class PacchettoTest extends ProdottoGenericoTest {
 	
-	private ProdottoSingolo prodotto;
 	private Pacchetto pacchetto;
 	
 	@Before
 	public void setUp() {
-		pacchetto = creazionePacchetto("Pacchetto", "Pacchetto basket");
-		prodotto = creazioneProdotto("Maglietta", 50, "Maglietta basket");
+		pacchetto = this.creazionePacchetto("Pacchetto", "Pacchetto basket");
+		prodotto = creazioneProdottoSingolo("Maglietta", 50, "Maglietta basket");
+		System.out.println("Creazione pacchetto");
 	}
-
+	
 	@Test
 	public void testNome() {
 		assertEquals("Pacchetto", pacchetto.getNome());
@@ -53,10 +53,13 @@ public class PacchettoTest {
 
 	@Test
 	public void testGetPrezzoPacchettoConPiuDiUnProdotto() {
-		ProdottoSingolo prodotto2 = creazioneProdotto("Pantaloncini", 50, "Pantaloncini basket");
+		ProdottoSingolo prodotto2 = creazioneProdottoSingolo("Pantaloncini", 50, "Pantaloncini basket");
 		pacchetto.aggiungiProdotto(prodotto);
+		System.out.println("Aggiunto prodotto");
 		pacchetto.aggiungiProdotto(prodotto2);
+		System.out.println("Aggiunto prodotto2");
 		assertEquals(100, pacchetto.getPrezzo(), 0);
+		System.out.println("Assert");
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -82,10 +85,6 @@ public class PacchettoTest {
 	@Test
 	public void testControlloPrezzo() {
 		pacchetto.controlloPrezzo(pacchetto.getPrezzo());
-	}
-	
-	private ProdottoSingolo creazioneProdotto(String nome, double prezzo, String descrizione) {
-		return new ProdottoSingolo(nome, prezzo, descrizione);
 	}
 
 	private Pacchetto creazionePacchetto(String nome, String descrizione) {
