@@ -4,9 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.*;
 
-public class ProdottoSingoloTest {
-
-	private ProdottoSingolo prodotto;
+public class ProdottoSingoloTest extends ProdottoGenericoTest {
 	
 	@Before
 	public void setUp() {
@@ -51,10 +49,6 @@ public class ProdottoSingoloTest {
 	@Test
 	public void testTipoDescrizione() {
 		assertTrue(prodotto.getDescrizione() instanceof String);
-	}
-
-	private ProdottoSingolo creazioneProdottoSingolo(String nome, double prezzo, String descrizione) {
-		return new ProdottoSingolo(nome, prezzo, descrizione);
 	}
 
 }
