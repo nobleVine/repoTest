@@ -30,11 +30,23 @@ public class ProfiloBancarioCliente {
 	}
 		
 	private void controlloParametri(Cliente cliente, int idConto, int saldo) {
-		if (cliente == null || idConto <= 0 || saldo <= 0)
-			throw new IllegalArgumentException("Nessun parametro del conto bancario può essere null o minore uguale di zero");
-		this.cliente = cliente;
-		this.idConto = idConto;
-		this.saldo = saldo;
+		if (cliente == null) {
+			throw new IllegalArgumentException("Il parametro cliente non può essere vuoto");
+		} else {
+			this.cliente = cliente;
+		}
+
+		if (idConto <= 0) {
+			throw new IllegalArgumentException("L'id del conto non può essere minore o uguale a zero");
+		} else {
+			this.idConto = idConto;
+		}
+		
+		if (saldo <= 0) {
+			throw new IllegalArgumentException("Il saldo non può essere minore o uguale a zero");
+		} else {
+			this.saldo = saldo;
+		}
 	}
 
 	public String faiAcquisto() {
