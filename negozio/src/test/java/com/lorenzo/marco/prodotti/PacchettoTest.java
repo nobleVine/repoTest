@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.*;
 
-public class PacchettoTest extends ProdottoGenericoTest {
+public class PacchettoTest extends ProdottoGenericoAstratto {
 	
 	private Pacchetto pacchetto;
 	

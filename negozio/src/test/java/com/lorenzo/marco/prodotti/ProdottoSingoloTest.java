@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.*;
 
-public class ProdottoSingoloTest extends ProdottoGenericoTest {
+public class ProdottoSingoloTest extends ProdottoGenericoAstratto {
 	
 	@Before
 	public void setUp() {
