@@ -32,7 +32,7 @@ public class Pacchetto extends ProdottoGenerico {
 
 	public void rimuoviProdotto(ProdottoSingolo prodotto) {
 		if (numProdotti() == 0)
-			throw new RuntimeException("Non posso rimuovere un prodotto da un pacchetto vuoto");
+			throw new IllegalArgumentException("Non posso rimuovere un prodotto da un pacchetto vuoto");
 		listaProdotti.remove(prodotto);
 	}
 

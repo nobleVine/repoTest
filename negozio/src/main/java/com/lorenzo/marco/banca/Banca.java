@@ -2,6 +2,6 @@ package com.lorenzo.marco.banca;
 
 public interface Banca {
 
-	public String pagamento(int idConto, double spesaTotale) throws IllegalArgumentException;
+	public String pagamento(int idConto, double spesaTotale);
 
 }
